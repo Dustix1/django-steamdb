@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ kniha }}{% endblock %}
+
+{% block content %}
+    <h2 class="text-light">{{ hra.nazev }}</h2>
+    <div class="row text-light">
+        <div class="col-md-4">
+            <p>Vyvojar: <a href="{% url 'developer_detail' hra.vyvojar.id %}">{{ hra.vyvojar }}</a></p>
+            <p>Rok vydání: {{ hra.datumVydani }}</p>
+            {% if hra.cena == 0 %}
+                <p>Hra je zdarma</p>
+            {% else %}
+                <p>Cena: {{ hra.cena }}€</p>
+            {% endif %}
+            <hr class="badge-light">
+            <h4>Kategorie</h4>
+            <ul>
+                {% for kategorie in hra.kategorie.all %}
+                    <li><a href="{% url 'category_detail' kategorie.id %}">{{ kategorie }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <h3>Popis hry</h3>
+            <div>{{ hra.popisek }}</div>
+        </div>
+    </div>
+{% endblock %}

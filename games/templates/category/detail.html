@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8 mt-3 mb-3">
+            <h2 class="text-light text-center text-uppercase p-3">{{ kategorie.nazevKategorie }}</h2>
+            {% for hra in hry %}
+            <div class="row mb-3">
+                <div class="col-lg-9">
+                    <h3><a href="{% url 'game_detail' hra.id %}">{{ hra.nazev }}</a> -<a href="{% url 'developer_detail' hra.vyvojar.id %}"><span class="badge badge-light text-light" style="background-color: #171B20">{{ hra.vyvojar.jmenoVyvojare }}</span></a></h3>
+                    <p class="text-light">{{ hra.popisek }}</p>
+                    <p class="alert text-light" style="background-color: #171B20">Vydáno: {{ hra.datumVydani }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-4 mt-3 mb-3">
+            <h2 class="text-light text-center p-3">Přehled kategorií</h2>
+            <ul class="list-group">
+            {% for kategorie in categories %}
+            <li class="list-group-item text-light" style="background-color: #171B20"><a href="{% url 'category_detail' kategorie.id %}">{{ kategorie.nazevKategorie }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
